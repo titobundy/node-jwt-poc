@@ -6,6 +6,12 @@ POST http://localhost:3000/auth/login
 
 ### Register
 POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "email" : "new@gmail.com",
+    "password" : "123"
+}
 
 ### Refresh Token
 POST http://localhost:3000/auth/refresh-token

@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/titobundy/node-jwt-poc#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
+    "mongoose": "^5.9.28",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
   }
