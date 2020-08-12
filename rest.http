@@ -9,8 +9,8 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email" : "new@gmail.com",
-    "password" : "123"
+    "email" : "test@test.com",
+    "password" : "12"
 }
 
 ### Refresh Token
