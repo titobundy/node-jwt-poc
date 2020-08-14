@@ -1,16 +1,23 @@
 ## Home
 GET http://localhost:3000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc0MzAzOTAsImV4cCI6MTU5NzQzMzk5MCwiYXVkIjoiNWYzNmRhNzU4YTM3ZmE3MTFkYjk2MDg4IiwiaXNzIjoibmVjdGlhLmNvbSJ9.Nc0nWCM54kzU5u_NEUCmo8DZ3RTeQfWiREiTAIrX6lU
 
 ### Login
 POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email" : "test@nectia.com",
+    "password" : "123456"
+}
 
 ### Register
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email" : "test@test.com",
-    "password" : "12"
+    "email" : "test@nectia.com",
+    "password" : "1234"
 }
 
 ### Refresh Token
