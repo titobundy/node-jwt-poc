@@ -1,6 +1,6 @@
 ## Home
 GET http://localhost:3000
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc0MzAzOTAsImV4cCI6MTU5NzQzMzk5MCwiYXVkIjoiNWYzNmRhNzU4YTM3ZmE3MTFkYjk2MDg4IiwiaXNzIjoibmVjdGlhLmNvbSJ9.Nc0nWCM54kzU5u_NEUCmo8DZ3RTeQfWiREiTAIrX6lU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc1MDkxNzEsImV4cCI6MTU5NzUwOTIwMSwiYXVkIjoiNWYzNmViODcyMTU3ZjUxYjEwZmM4NmZkIiwiaXNzIjoibmVjdGlhLmNvbSJ9.-GG_Ay1uLZFJwCWLUiIW2FX_mxKWGk2_Whl95-KyDzc
 
 ### Login
 POST http://localhost:3000/auth/login
@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "email" : "test@nectia.com",
-    "password" : "123456"
+    "password" : "1234"
 }
 
 ### Register
@@ -22,6 +22,11 @@ Content-Type: application/json
 
 ### Refresh Token
 POST http://localhost:3000/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc1MDg2ODksImV4cCI6MTYyOTA2NjI4OSwiYXVkIjoiNWYzNmViODcyMTU3ZjUxYjEwZmM4NmZkIiwiaXNzIjoibmVjdGlhLmNvbSJ9.OZMO5uFmV38COw9AYo7OgQ5dcxOC5VBkV_mDULqN0uM"
+}
 
 ### Logout
 DELETE http://localhost:3000/auth/logout
