@@ -3,9 +3,18 @@ const morgan = require('morgan');
 const createError = require('http-errors');
 require('dotenv').config();
 require('./helpers/init-db');
+const client = require('./helpers/init-redis');
 const { verifyAccessToken } = require('./helpers/jwt-helper');
 
 const AuthRoute = require('./routes/auth.routes');
+
+// Test redis
+client.SET('foo', 'bar');
+
+client.GET('foo', (err, value) => {
+    if(err) console.log(err.message)
+    else console.log(value);
+});
 
 const app = express();
 app.use(morgan('dev'));
