@@ -5,6 +5,7 @@ const User = require('../models/user.model');
 const { response } = require('express');
 const { authSchema } = require('../helpers/validation-schema');
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../helpers/jwt-helper');
+const clientRedis = require('../helpers/init-redis');
 
 router.post('/register', async (req, res, next) => {
    
@@ -64,7 +65,22 @@ router.post('/refresh-token', async (req, res, next) => {
 });
 
 router.delete('/logout', async (req, res, next) => {
-    console.log('logout route');
+    try {
+        const { refreshToken } = req.body;
+        if(!refreshToken) throw createError.BadRequest();
+        const userId = await verifyRefreshToken(refreshToken);
+        clientRedis.DEL(userId, (err, val) => {
+            if(err) {
+                console.log(err.message);
+                throw createError.InternalServerError();
+            }
+            console.log(val);
+            res.sendStatus(204);
+        })
+
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
