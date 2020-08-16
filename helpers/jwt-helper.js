@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const createError = require('http-errors');
 const { token } = require('morgan');
+const clientRedis = require('./init-redis');
 
 module.exports = {
     signAccessToken: (userId) => {
@@ -14,7 +15,6 @@ module.exports = {
             };
             jwt.sign(payload, secret, options, (err, token) => {
                 if(err) {
-                    // reject(err);
                     reject(createError.InternalServerError());
                 } 
                 resolve(token);
@@ -50,7 +50,14 @@ module.exports = {
                 if(err) {
                     reject(createError.InternalServerError());
                 } 
-                resolve(token);
+                clientRedis.SET(userId, token, 'EX', 365*24*60*60, (err, reply) => {
+                    if(err) {
+                        console.log(err.message);
+                        reject(createError.InternalServerError());
+                        return;
+                    }
+                    resolve(token);
+                });
             });
         });
     },
@@ -59,7 +66,16 @@ module.exports = {
             jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
                 if(err) return reject(createError.Unauthorized());
                 const userId = payload.aud;
-                resolve(userId);
+                clientRedis.GET(userId, (err, result) => {
+                    if(err) {
+                        console.log(err.message);
+                        reject(createError.InternalServerError());
+                        return;
+                    }
+                    if(refreshToken === result) resolve(userId);
+                    reject(createError.Unauthorized())
+                });
+                
             })
         })
     }
